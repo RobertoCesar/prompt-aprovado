@@ -784,14 +784,16 @@ footer {
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showPage('home')">Módulos</button>
     <button class="nav-tab" onclick="showPage('prompts')">Prompts Prontos</button>
+    <button class="nav-tab" onclick="showPage('ciclo')">Ciclo de Estudos</button>
   </div>
-  <span class="badge-pro">Concurseiro Top 10</span>
+  <span class="badge-pro">Código 6</span>
 </nav>
 
 <!-- Mobile menu -->
 <div class="mobile-menu-bar" style="padding: 0.5rem 1rem; border-bottom: 1px solid var(--border);">
   <button class="nav-tab active" onclick="showPage('home')" id="mob-tab-home">Módulos</button>
   <button class="nav-tab" onclick="showPage('prompts')" id="mob-tab-prompts">Prompts Prontos</button>
+  <button class="nav-tab" onclick="showPage('ciclo')" id="mob-tab-ciclo">Ciclo de Estudos</button>
 </div>
 
 <!-- =================== PAGE: HOME =================== -->
@@ -800,11 +802,11 @@ footer {
   <div class="hero">
     <div class="hero-glow"></div>
     <div class="hero-badge">✦ Mini Curso · Engenharia de Prompt para Concursos</div>
-    <h1>Estude pra concurso com<br><em>IA do Jeito Certo</em></h1>
-    <p class="hero-sub">Estrutura de Prompts, Prompts prontos e estudo ativo para concurseiros que querem resultado — sem enrolação.</p>
+    <h1>Estude pra concurso com<br><em>IA de verdade</em></h1>
+    <p class="hero-sub">Prompts prontos, NotebookLM e estudo ativo para concurseiros que querem resultado — sem enrolação, sem guru.</p>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">módulos objetivos</div></div>
-      <div class="stat"><div class="stat-num">20+</div><div class="stat-label">prompts prontos</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">módulos</div></div>
+      <div class="stat"><div class="stat-num">40+</div><div class="stat-label">prompts prontos</div></div>
       <div class="stat"><div class="stat-num">0</div><div class="stat-label">enrolação</div></div>
     </div>
     <div class="hero-cta">
@@ -879,13 +881,13 @@ Com base nisso, ajuste meu ciclo de estudos para a próxima semana:
 
 <div class="cta-bar" id="cta-global">
   <h3>🎯 Aprovação não é sorte — é método.</h3>
-  <p>Use os prompts prontos, siga o ciclo e deixe a IA turbinar seu aprendizado.<br>Desenvolvido por usou o método pra passar em 6º lugar no TRT2.</p>
+  <p>Use os prompts prontos, siga o ciclo e deixe a IA trabalhar por você.<br>Desenvolvido por quem passou em 6º lugar no TRT2.</p>
   <a href="#modulos" class="btn-primary" onclick="showPage('home'); return false;">Começar pelo Módulo 1 →</a>
 </div>
 
 <footer>
-  <span class="footer-text">⚡ <strong>PromptAprovado</strong> · <a href="#">Concurseiro Top 10</a></span>
-  <span class="footer-text">Feito para concurseiros diferenciados</span>
+  <span class="footer-text">⚡ <strong>PromptAprovado</strong> · <a href="#">Código 6</a></span>
+  <span class="footer-text">Feito para concurseiros sérios · maio/2026</span>
 </footer>
 
 <script>
@@ -922,12 +924,13 @@ Formate a resposta com: (1) definição clara, (2) 2 exemplos práticos, (3) 3 a
   },
   {
     title: '02 · NotebookLM para Concursos',
+    tag: 'mai/26',
     desc: 'Transforme seus PDFs de edital em um tutor inteligente personalizado.',
     pills: ['notebooks', 'audio overview', 'mindmaps', 'citações'],
     content: `
-<p class="lesson-text"><strong>NotebookLM</strong> do Google é a ferramenta mais poderosa para transformar seus materiais de edital em fontes de estudo interativas. Ela lê seus PDFs e responde com base <em>exclusivamente</em> neles.</p>
+<p class="lesson-text"><strong>NotebookLM</strong> (Google, atualizado em maio/2026) é a ferramenta mais poderosa para transformar seus materiais de edital em fontes de estudo interativas. Ela lê seus PDFs e responde com base <em>exclusivamente</em> neles.</p>
 
-<div class="highlight-box">🆕 Novidades: geração de mindmaps automáticos a partir dos docs, versão mobile com áudio offline, respostas com citação exata da página do documento, e sincronização em tempo real com Google Drive.</div>
+<div class="highlight-box">🆕 Novidades de mai/2026: geração de mindmaps automáticos a partir dos docs, versão mobile com áudio offline, respostas com citação exata da página do documento, e sincronização em tempo real com Google Drive.</div>
 
 <p class="lesson-text"><strong>Como configurar seu Notebook Ideal:</strong></p>
 <ul class="steps-list">
@@ -1132,7 +1135,7 @@ function renderModules() {
   grid.innerHTML = modules.map((m, i) => `
     <div class="module-card" id="mod-${i}" onclick="openModule(${i})">
       <div class="module-num">MOD 0${i+1}</div>
-      <div class="module-title">${m.title.replace('02 · NotebookLM para Concursos', '02 · NotebookLM para Concursos')}</div>
+      <div class="module-title">${m.title.replace('02 · NotebookLM para Concursos', '02 · NotebookLM para Concursos <span class="tag-new">mai/26</span>')}</div>
       <div class="module-desc">${m.desc}</div>
       <div class="module-pills">${m.pills.map(p => `<span class="pill">${p}</span>`).join('')}</div>
     </div>
@@ -1266,6 +1269,287 @@ function copyById(id, btn, e) {
 // =================== INIT ===================
 renderModules();
 renderPrompts('all');
+</script>
+
+<!-- ===== TELA DE SENHA ===== -->
+<style>
+#gate {
+  position: fixed;
+  inset: 0;
+  background: #0d0d1a;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+#gate.hidden {
+  display: none;
+}
+
+.gate-glow {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(233,69,96,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.gate-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.gate-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.gate-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+
+.gate-logo span { color: var(--accent); }
+
+.gate-title {
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text2);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.gate-input-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.gate-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 0.9rem 3rem 0.9rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s;
+  letter-spacing: 2px;
+}
+
+.gate-input::placeholder {
+  letter-spacing: 0;
+  color: var(--text2);
+  font-family: var(--font);
+  font-size: 0.9rem;
+}
+
+.gate-input:focus {
+  border-color: rgba(233,69,96,0.5);
+}
+
+.gate-eye {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.gate-eye:hover { color: var(--text); }
+
+.gate-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, var(--accent), #c73652);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.3px;
+}
+
+.gate-btn:hover { opacity: 0.9; }
+.gate-btn:active { transform: scale(0.98); }
+
+.gate-error {
+  font-family: var(--font);
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-align: center;
+  min-height: 1.2em;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.gate-error.visible { opacity: 1; }
+
+.gate-hint {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  color: var(--text2);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.gate-hint a {
+  color: var(--accent);
+  text-decoration: none;
+}
+</style>
+
+<div id="gate">
+  <div class="gate-glow"></div>
+  <div class="gate-box">
+    <div class="gate-logo">
+      <div class="gate-logo-icon">⚡</div>
+      Prompt<span>Aprovado</span>
+    </div>
+
+    <div class="gate-title">
+      Digite sua senha de acesso<br>para continuar
+    </div>
+
+    <div class="gate-input-wrap">
+      <input
+        class="gate-input"
+        id="gate-input"
+        type="password"
+        placeholder="sua senha de acesso"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') gateSubmit()"
+      />
+      <button class="gate-eye" onclick="gateToggleEye()" title="mostrar/ocultar">👁</button>
+    </div>
+
+    <button class="gate-btn" onclick="gateSubmit()">Acessar →</button>
+
+    <div class="gate-error" id="gate-error">Senha incorreta. Tente novamente.</div>
+
+    <div class="gate-hint">
+      Recebeu sua senha por email após a compra.<br>
+      Dúvidas? <a href="mailto:seu@email.com">seu@email.com</a>
+    </div>
+  </div>
+</div>
+
+<script>
+
+const WEBHOOK_URL = 'https://n8n.devoluapp.cloud/webhook/prompt-aprovado-login';
+
+// Mantém acesso por 7 dias após login bem-sucedido
+const CHAVE = 'pa_auth';
+const VALIDADE_DIAS = 7;
+
+(function() {
+  try {
+    const salvo = localStorage.getItem(CHAVE);
+    if (salvo) {
+      const { exp } = JSON.parse(salvo);
+      if (Date.now() < exp) {
+        document.getElementById('gate').classList.add('hidden');
+      }
+    }
+  } catch(e) {}
+})();
+
+async function gateSubmit() {
+  const btn = document.querySelector('.gate-btn');
+  const err = document.getElementById('gate-error');
+  const inp = document.getElementById('gate-input');
+  const val = inp.value.trim();
+
+  if (!val) return;
+
+  // Estado de carregando
+  btn.textContent = 'Verificando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ senha: val })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.acesso === true) {
+      // Salva sessão por 7 dias
+      const exp = Date.now() + VALIDADE_DIAS * 24 * 60 * 60 * 1000;
+      localStorage.setItem(CHAVE, JSON.stringify({ exp }));
+      const gate = document.getElementById('gate');
+      gate.style.opacity = '0';
+      gate.style.transition = 'opacity 0.35s ease';
+      setTimeout(() => gate.classList.add('hidden'), 350);
+    } else {
+      gateErro(inp, err);
+    }
+  } catch(e) {
+    // Erro de rede ou n8n fora do ar
+    err.textContent = 'Erro de conexão. Tente novamente.';
+    gateErro(inp, err);
+  } finally {
+    btn.textContent = 'Acessar →';
+    btn.disabled = false;
+  }
+}
+
+function gateErro(inp, err) {
+  err.classList.add('visible');
+  inp.style.borderColor = 'rgba(233,69,96,0.6)';
+  setTimeout(() => {
+    err.textContent = 'Senha incorreta. Tente novamente.';
+    err.classList.remove('visible');
+    inp.style.borderColor = '';
+  }, 2500);
+}
+
+function gateToggleEye() {
+  const inp = document.getElementById('gate-input');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
 </script>
 </body>
 </html>
