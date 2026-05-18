@@ -1475,12 +1475,13 @@ renderPrompts('all');
 </div>
 
 <script>
+// =================== PORTA DE ACESSO ===================
+// Altere a senha abaixo:
+const SENHA_ACESSO = 'promptaprovado2025';
 
-const WEBHOOK_URL = 'https://n8n.devoluapp.cloud/webhook/prompt-aprovado-login';
-
-// Mantém acesso por 7 dias após login bem-sucedido
+// Mantém acesso por 7 dias após login
 const CHAVE = 'pa_auth';
-const VALIDADE_DIAS = 30;
+const VALIDADE_DIAS = 7;
 
 (function() {
   try {
@@ -1494,56 +1495,24 @@ const VALIDADE_DIAS = 30;
   } catch(e) {}
 })();
 
-async function gateSubmit() {
-  const btn = document.querySelector('.gate-btn');
+function gateSubmit() {
+  const val = document.getElementById('gate-input').value.trim();
   const err = document.getElementById('gate-error');
-  const inp = document.getElementById('gate-input');
-  const val = inp.value.trim();
-
-  if (!val) return;
-
-  // Estado de carregando
-  btn.textContent = 'Verificando...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ senha: val })
-    });
-
-    const data = await res.json();
-
-    if (res.ok && data.acesso === true) {
-      // Salva sessão por 7 dias
-      const exp = Date.now() + VALIDADE_DIAS * 24 * 60 * 60 * 1000;
-      localStorage.setItem(CHAVE, JSON.stringify({ exp }));
-      const gate = document.getElementById('gate');
-      gate.style.opacity = '0';
-      gate.style.transition = 'opacity 0.35s ease';
-      setTimeout(() => gate.classList.add('hidden'), 350);
-    } else {
-      gateErro(inp, err);
-    }
-  } catch(e) {
-    // Erro de rede ou n8n fora do ar
-    err.textContent = 'Erro de conexão. Tente novamente.';
-    gateErro(inp, err);
-  } finally {
-    btn.textContent = 'Acessar →';
-    btn.disabled = false;
+  if (val === SENHA_ACESSO) {
+    const exp = Date.now() + VALIDADE_DIAS * 24 * 60 * 60 * 1000;
+    localStorage.setItem(CHAVE, JSON.stringify({ exp }));
+    const gate = document.getElementById('gate');
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.35s ease';
+    setTimeout(() => gate.classList.add('hidden'), 350);
+  } else {
+    err.classList.add('visible');
+    document.getElementById('gate-input').style.borderColor = 'rgba(233,69,96,0.6)';
+    setTimeout(() => {
+      err.classList.remove('visible');
+      document.getElementById('gate-input').style.borderColor = '';
+    }, 2500);
   }
-}
-
-function gateErro(inp, err) {
-  err.classList.add('visible');
-  inp.style.borderColor = 'rgba(233,69,96,0.6)';
-  setTimeout(() => {
-    err.textContent = 'Senha incorreta. Tente novamente.';
-    err.classList.remove('visible');
-    inp.style.borderColor = '';
-  }, 2500);
 }
 
 function gateToggleEye() {
